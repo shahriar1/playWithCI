@@ -12,7 +12,7 @@ class HelloTest extends PHPUnit_Extensions_Database_TestCase
     {
         if ($this->conn === null) {
             if (self::$pdo == null) {
-                self::$pdo = new PDO('mysql:dbname=play;host=localhost', 'root', 'root');
+                self::$pdo = new PDO('mysql:dbname=circle_test;host=localhost', 'ubuntu', '');
             }
             $this->conn = $this->createDefaultDBConnection(self::$pdo, 'play');
         }
