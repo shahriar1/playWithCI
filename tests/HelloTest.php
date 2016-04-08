@@ -18,6 +18,7 @@ class HelloTest extends PHPUnit_Extensions_Database_TestCase
         }
 
         return $this->conn;
+        
     }
 
     protected function getDataSet()
