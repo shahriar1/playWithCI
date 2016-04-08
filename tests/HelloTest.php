@@ -12,7 +12,7 @@ class HelloTest extends PHPUnit_Extensions_Database_TestCase
     {
         if ($this->conn === null) {
             if (self::$pdo == null) {
-                self::$pdo = new PDO('mysql:dbname=circle_test;host=localhost', 'ubuntu', '');
+                self::$pdo = new PDO('mysql:host=localhost;port=3306;dbname=circle_test', 'ubuntu', '');
             }
             $this->conn = $this->createDefaultDBConnection(self::$pdo, 'play');
         }
@@ -30,7 +30,6 @@ class HelloTest extends PHPUnit_Extensions_Database_TestCase
 
     public function testSuccess()
     {
-        $dataSet = $this->getConnection()->createDataSet();
         $stmt = self::$pdo->query("SELECT * FROM fruits");
         $fruits = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $this->assertCount(2, $fruits);
