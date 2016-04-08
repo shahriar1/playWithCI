@@ -2,16 +2,44 @@
 
 //require "vendor/autoload.php";
 
-class HelloTest extends PHPUnit_Framework_TestCase
+class HelloTest extends PHPUnit_Extensions_Database_TestCase
 {
-    public function testSuccess()
+    static private $pdo = null;
+
+    private $conn = null;
+
+    final public function getConnection()
     {
-        $this->assertTrue(1 === 1);
+        if ($this->conn === null) {
+            if (self::$pdo == null) {
+                self::$pdo = new PDO('mysql:dbname=play;host=localhost', 'root', 'root');
+            }
+            $this->conn = $this->createDefaultDBConnection(self::$pdo, 'play');
+        }
+
+        return $this->conn;
     }
 
-    public function testFailed()
+    protected function getDataSet()
     {
-        $this->assertTrue(1 === 2);
+        return new PHPUnit_Extensions_Database_DataSet_YamlDataSet(
+            dirname(__FILE__)."/fruits.yml"
+        );
+    }
+
+
+    public function testSuccess()
+    {
+        $dataSet = $this->getConnection()->createDataSet();
+        $stmt = self::$pdo->query("SELECT * FROM fruits");
+        $fruits = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $this->assertCount(2, $fruits);
+
+    }
+
+    public function testTrue()
+    {
+        $this->assertTrue(1 === 1);
     }
 }
 

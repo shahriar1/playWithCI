@@ -1,0 +1,9 @@
+fruits:
+  -
+    id: 1
+    name: "Coconut"
+    color: "Green"
+  -
+    id: 2
+    name: "Apple"
+    color: "Red"
