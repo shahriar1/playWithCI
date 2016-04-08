@@ -1,6 +1,5 @@
 <?php
 
-require_once "vendor/autoload.php";
 
 class HelloTest extends PHPUnit_Extensions_Database_TestCase
 {
